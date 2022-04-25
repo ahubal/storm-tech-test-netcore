@@ -10,14 +10,16 @@ namespace Todo.Models.TodoLists
         public string Title { get; }
         [DisplayName("Hide completed")]
         public bool HideCompleted { get; }
+        public bool OrderByRank { get; }
         public ICollection<TodoItemSummaryViewmodel> Items { get; }
 
-        public TodoListDetailViewmodel(int todoListId, string title, bool hideCompleted, ICollection<TodoItemSummaryViewmodel> items)
+        public TodoListDetailViewmodel(int todoListId, string title, bool hideCompleted, bool orderByRank, ICollection<TodoItemSummaryViewmodel> items)
         {
             Items = items;
             TodoListId = todoListId;
             Title = title;
             HideCompleted = hideCompleted;
+            OrderByRank = orderByRank;
         }
     }
 }

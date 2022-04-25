@@ -18,12 +18,26 @@
             </a>
         </li>
         <li class="list-group-item">
-            @{ var showHiddenOnClick = !Model.HideCompleted;}
-            <a id="checkbox" asp-action="Detail" asp-route-todoListId="@Model.TodoListId" asp-route-hideCompleted="@showHiddenOnClick">
+            @{
+                var showHiddenOnClick = !Model.HideCompleted;
+                var orderByRankOnClick = !Model.OrderByRank;
+                var orderProperty = Model.OrderByRank ? "Importance" : "Rank";
+            }
+            <a id="checkbox" asp-action="Detail" 
+               asp-route-todoListId="@Model.TodoListId" 
+               asp-route-hideCompleted="@showHiddenOnClick"
+               asp-route-orderByRank="@Model.OrderByRank">
                 <input type="checkbox" 
                        asp-for="@Model.HideCompleted" 
                        onchange="document.getElementById('checkbox').click();"/> 
                 @Html.DisplayNameFor(m => m.HideCompleted)
+            </a>
+            <text class="col-md-offset-1"></text>
+            <a asp-action="Detail" 
+               asp-route-todoListId="@Model.TodoListId" 
+               asp-route-hideCompleted="@Model.HideCompleted"
+               asp-route-orderByRank="@orderByRankOnClick">
+                <text>Order by @orderProperty</text>
             </a>
         </li>
 
@@ -66,7 +80,7 @@
                             @item.ResponsibleParty.UserName
 
                             <img src="https://www.gravatar.com/avatar/@Gravatar.GetHash(item.ResponsibleParty.Email)?s=30" />
-
+                            <text>@Html.DisplayNameFor(m => item.Rank): @item.Rank</text>
                         </small>
                     </div>
                 </div>
