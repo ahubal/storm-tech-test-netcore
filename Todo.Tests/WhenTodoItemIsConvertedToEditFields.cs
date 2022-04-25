@@ -15,12 +15,10 @@ namespace Todo.Tests
         public WhenTodoItemIsConvertedToEditFields()
         {
             var todoList = new TestTodoListBuilder(new IdentityUser("alice@example.com"), "shopping")
-                    .WithItem("bread", Importance.High)
-                    .Build()
-                ;
+                .WithItem("bread", Importance.High)
+                .Build();
 
             srcTodoItem = todoList.Items.First();
-
             resultFields = TodoItemEditFieldsFactory.Create(srcTodoItem);
         }
 

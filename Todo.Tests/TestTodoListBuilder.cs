@@ -5,14 +5,14 @@ using Todo.Data.Entities;
 
 namespace Todo.Tests
 {
-    /*
-     * This class makes it easier for tests to create new TodoLists with TodoItems correctly hooked up
-     */
+    /// <summary>
+    /// This class makes it easier for tests to create new TodoLists with TodoItems correctly hooked up
+    /// </summary>
     public class TestTodoListBuilder
     {
         private readonly string title;
         private readonly IdentityUser owner;
-        private readonly List<(string, Importance)> items = new List<(string, Importance)>();
+        private readonly List<(string, Importance)> items = new();
 
         public TestTodoListBuilder(IdentityUser owner, string title)
         {
