@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Todo.Data;
 using Todo.Data.Entities;
@@ -14,10 +16,10 @@ namespace Todo.Services
                 .Where(tl => tl.Owner.Id == userId);
         }
 
-        public static TodoList SingleTodoList(this ApplicationDbContext dbContext, int todoListId)
+        public static TodoList SingleTodoList(this ApplicationDbContext dbContext, int todoListId, bool hideCompleted = false)
         {
             return dbContext.TodoLists.Include(tl => tl.Owner)
-                .Include(tl => tl.Items.OrderBy(i=>i.Importance))
+                .Include(tl => tl.Items.Where(ti=> !hideCompleted || !ti.IsDone).OrderBy(i=>i.Importance))
                 .ThenInclude(ti => ti.ResponsibleParty)
                 .Single(tl => tl.TodoListId == todoListId);
         }
